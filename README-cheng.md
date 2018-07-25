@@ -154,3 +154,43 @@ echo "this will be bad" >&3
 ### 记录消息
 + 将输出同时发送到显示器和日志文件，不用将重定向两次，只要使用`tee`命令即可；`tee`命令相当于管道的一个`T`型接头，它将从STDIN过来的数据同时发送两处`STDOUT`；`tee命令行所指定的文件名`；由于`tee`会重定向来自STDIN的数据，可以用它配合管道命令来重定向命令输出：`date | tee testfile`；默认情况下，`tee`命令会在每次使用时覆盖输出文件的内容，如果想将数据追加到文件中可以使用` -a `选项：`date | tee -a testfile`；
 
+### 创建临时文件
++ Linux系统有特殊的目录，专供临时文件使用，Linux使用`/tmp`目录来存放不需要永久保存的文件，大多数Linux发行版配置了系统在启动时自动删除`/tmp`目录的所有文件；有个特殊命令可以用来创建临时文件，`mktemp`命令可以在`/tmp`目录中创建一个唯一的临时文件，shell会创建这个文件，但不用默认的`umask`，它会将文件的读和写权限分配给文件的属主，并将你设成文件的属主，一旦创建了文件，你就在脚本中有了完整的读写权限，但其他人无法访问他；默认情况下，`mktemp`会在本地所在目录中创建一个文件，要用`mktemp`命令在本地目录中创建一个临时文件，需要指定一个文件名模板就行了，文件名模板可以是任意文本文件名，在文件名末尾加上`6个xxxxxx`就行了：`mktemp test.XXXXXX`；`mktemp`命令会用6个字符替换这6个x，从而保证文件名在目录中是唯一的，你可以创建多个临时文件，它可以保证每个文件都是唯一的；在脚本中使用`mktemp`命令时，可以要将文件名保存到变量中，这样就可以在后面的脚本中引用了：如：
+
+```
+tempfile=$(mktemp test.XXXXXX)
+exec 3>$tempfile
+echo "this is script writes to temp file $tempfile"
+echo "this is the first line" >&3
+echo "this is the second line" >&3
+echo "this is the last line" >&3
+exec 3>&-
+echo "done creating tempfile the contents are:"
+cat $tempfile
+rm -rf $tempfile 2>/dev/null
+```
+
+#### 在`/tmp`命令创建临时文件
++ `-t `选项会强制`mktemp`命令来在系统的临时目录`/tmp`下来创建该文件，用这个特性，`mktemp`命令会返回用来创建临时文件的全路径；
+```
+tempfile=$(mktemp -t tmp.XXXXXX)
+echo "this is a test file" >$tempfile
+echo "this is the second line of the test" >>$tempfile
+echo "the tempfile is locate at : $tempfile"
+cat $tempfile
+rm -rf $tempfile
+```
+#### 创建临时目录
++ `-d`选项告诉`mktemp`命令来创建一个临时目录（在当前所在目录下）；如：
+
+```
+tempfile=$(mktemp -d dir.XXXXXX)
+cd $tempfile
+tempfile1=$(mktemp temp.XXXXXX)
+tempfile2=$(mktemp temp.XXXXXX)
+exec 7>$tempfile1
+exec 8>$tempfile2
+echo "sending data to dictory $tempfile"
+echo "this is a test line of data for $tempfile1" >&7
+echo "this is a test line of data for $tempfile2" >&8
+```
