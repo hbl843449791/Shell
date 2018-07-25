@@ -42,3 +42,14 @@ echo "but this should go to the testerror file" >&2
 
 + 一旦重定向了STDERR或STDOUT，就很难再将他们重定向回原来的位置，以后会记录；
 
+### 在脚本中重定向输入
++ `exec`命令允许你将STDIN重定向到Linux系统上的文件中：`exec 0< testfile`；这个重定向只要在脚本需要输入时就会起作用；如：
+```
+exec 0< testfile
+count=1
+while read line
+do
+       echo "LINE #$count:$line"
+       count=$[ $count + 1 ]
+done
+```
