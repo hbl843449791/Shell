@@ -69,3 +69,23 @@ do
        fi
 done
 ```
+
+### C语言风格的for命令
+#### C语言风格的for命令格式
+```
+//for (( variable assignment : condition ; iterator_process ))
+for(( a = 1 ; a < 5 ; a++ ))
+do
+       echo "the next number is $a"
+done
+```
+
+|for的规则|
+|------|
+|变量赋值可以有空格|
+|条件中的变量不以美元符开头|
+|迭代过程的算式未用expr命令模式|
+
++ 使用多个变量；`for (( a=1, b=10 ; a <= 10 ; b++ ,a++ ))`；
+
+
