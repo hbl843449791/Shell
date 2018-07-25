@@ -241,3 +241,70 @@ done
 |`-x` | 排除某个对象|
 |`-y` | 对所有问题回答yes|
 
+### 获取用户输入
+#### 基本的读取
++ `read`命令从标准输入（键盘）或另外一个文件描述符中接受输入，在收到输入后，`read`命令会将数据放进一个变量；
+#### 将输入保存在单个变量中：如：
+```
+echo -n "enter your name:"//-n选项指的是：不会在字符串末尾输出换行符，允许脚本用户紧跟其后输入数据，而不是下一行，这使得脚本看上去更人性化
+read name
+echo "hello $name , welcome to my program"
+```
++ 该例子中：输入的数据保存在`name`一个变量中；`-n`选项不会在字符串结尾输出换行符；允许脚本用户紧跟其后输入数据，而不是下一行，这让脚本看起来更美观；
+#### 将输入保存到多个变量中如：
+```
+read -p "please enter your age:" age day
+days=$[ $age * 365 ]
+echo "that makes you over $days days old!"
+```
++ 使用`-p`命令可以可以指定多个变量；
+#### 保存到特殊的变量中：如：
+```
+read -p "enter your name:"
+echo 
+echo hello $REPLY welcome to my program
+```
++ 不指定变量，`read`命令会将收到的任何数据都放进特殊环境变量`REPLY`中。`REPLY`环境变量会保存输入的所有数据，可以在shell脚本中像使用其他变量一样使用；
+### 超时
++ 使用`-t`选项来指定一个计时器，`-t`选项指定了`read`命令等待输入的秒数，当计时器过期后，`read`命令会返回非零的退出状态码：如：
+```
+if read -t 5 -p "please your name:" name
+then
+       echo "hello $name welcome to my script"
+else
+       echo 
+       echo "sorry too slow!"
+fi
+```
++ 也可以不对输入过程计时而是让`read`命令来统计输入的字符数，当输入的字符数达到预设的字符数时，就自动退出，将输入的数据赋值给变量：
+
+```
+read -n1 -p "do you want to continue [Y/N]?"answer //-n选项和值1一起使用，告诉read命令在接受单个字符后退出，只要接下单个字符回答后，read命令会接受输入并将它传给变量，无需按回车键
+case $answer in
+       Y | y) echo
+                 echo "fine continue on......";;
+       N | n) echo
+                 echo "ok goodbye"
+                 exit;;
+esac
+echo "this is the end of the script"
+```
+### 隐藏方式读取
++ `-s`选项可以避免在`read`命令中输入的数据出现在显示器上（实际上，数据会显示，只不过是`read`命令会将文本颜色设置跟背景色一样）：如：
+```
+read -s -p "enter your password" password
+echo 
+echo "this is yout password $password"
+```
+### 从文件中读取
++ 也可以用`read`命令来读取Linux系统上文件里保存的数据，每次调用`read`命令，它都会从文件中读取一行文本，当文件中再没有内容了，`read`命令就会退出并且返回非零退出状态码；其中最难的部分是将文件中的数据传给`read`命令，最常见的方法是对文件使用`cat`命令，将结果通过管道直接传给含有`read`命令的`while`命令：如：
+
+```
+count=1
+cat test | while read line
+do
+       echo "line $count: $line"
+       count=$[ $count + 1 ]
+done
+echo "finished"
+```
