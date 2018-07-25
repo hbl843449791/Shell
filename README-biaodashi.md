@@ -84,3 +84,34 @@
 + 可以用单破折号在字符组中表示字符区间，只需要指定区间的第一个字符、单破折号以及区间的最后一个字符就行了（包含边缘），根据Linux系统采用的字符集，正则表达式会包括此区间内的任意字符；
 #### 查找邮编的例子
 ![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-24.jpg)
+
++ 同样的方法也适用于字母等任意有效字符；如：`[c-h]at`匹配c到h之间的字母；可以在单个字符组指定多个不连续的区间：`sed -n '/[a-ch-m]at/p' test`；该字符会匹配a到c和h到m之间的字符；
+### 特殊字符组
++ BRE还包含了一些特殊的字符组，用于匹配特殊类型的字符；
+
+|BRE特殊字符组组|描述|
+|------|------|
+|`[[:alpha:]]`|匹配任意字母字符，不管是大写还是小写|
+|`[[:alnum:]]`|匹配任意字母数字字符0~9，A~Z，a~z|
+|`[[:blank:]]`|匹配空格或制表符|
+|`[[:digit:]]`|匹配0~9之间的数字|
+|`[[:lower:]]`|匹配小写字母字符a~z|
+|`[[:print:]]`|匹配任意可打印字符|
+|`[[:punct:]]`|匹配标点符号|
+|`[[:space:]]`|匹配任意空白字符：空格、制表符、NL、FF、VT和CR|
+|`[[:upper:]]`|匹配任意大写字母字符A~Z|
+
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-25.jpg)
+
+#### 星号
++ 在字符后面放置星号表明该字符必须在匹配模式的文本中出现0次或多次；
+
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-26.jpg)
+
++ 将点号特殊字符和星号特殊字符组合起来，这个组合能够匹配任意数量的任意字符：
+
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-27.jpg)
+
++ 星号还可以使用在字符组上，他允许指定可能在文本中出现多次的字符组或字符区间：
+
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-28.jpg)
