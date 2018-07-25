@@ -243,3 +243,5 @@ result=$(fun1 $value)
 echo "the fun1 of $value is : $result"
 ```
 
+### 创建库、在命令行上使用函数、实例
+[创建库、在命令行上使用函数、实例](https://github.com/ningbaoqi/Shell/blob/master/README-function1.md)
