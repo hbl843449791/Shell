@@ -43,3 +43,36 @@ function multem{
 #### 读取函数文件
 + 只要是在shell脚本中，都可以使用source命令（或者他的别名点操作符）将库文件中的函数添加在你的.bashrc脚本中;在.bashrc脚本中添加：`. /home/ningbaoqi/mylib`；要保证库文件的路径名正确，以便bash shell能够找到该文件，下次启动shell时，库中的所有函数都能在命令行界面下使用； shell还会将定义好的函数传给子shell进程，这样一来这些函数就自动能够用于该shell会话中的任何脚本；
 
+### 实例
++ 可以下载大量各式各样的函数，并将其用于自己的应用程序中，shtool库提供了一些简单的shell脚本函数，可以用来完成日常的shell功能，如：处理临时文件和目录或者格式化输出显示；
+#### 下载及安装
++ 首先将FNU shtool库下载并安装到你的系统中，这样才能子shell脚本中使用这些库文件shtool下载地址：`ftp://ftp.gnu.org/gnu/shtool/shtool-2.0.8.tar.gz`；将文件shtool-2.0.8.tar.gz下载到下载目录中，然后你可以使用命令行工具cp或者Linux发行版中的图形文件管理器将文件复制到主目录中，完成复制操作后，使用tar命令提取文件：`tar -zxvf shtool-2.0.8.tar.gz`，该命令会将打包文件中的内容提取到shtool-2.0.8目录中；
+#### 构建库
++ shtool文件必须针对指定的Linux环境进行配置，配置工作必须使用标准的configure和make命令，这两个命令常用于C编译环境，要构件库文件只要输入：`./configure ；make`；configure命令会检查构建shtool库文件所必须的软件，一旦发现了所需的工具。它会使用工具路径修改配置文件；make命令负责构建shtool库文件，最终的结果是一个完整的库软件包；也可以使用make命令测试这个库文件：`make test`：测试模式会测试shtool库中所有的函数，如果全部通过测试，就可以将库安装到Linux系统中的公共位置，这样所有的脚本就能使用这个库了，要完成安装，需要使用make命令的install选项，不过需要root权限执行该命令，安装完成就可以使用这些函数了；
+#### shtool库函数
+
+|函数|描述|
+|------|------|
+|`Arx `|   创建归档文件（包括一些扩展功能）|
+|`Echo  `|  显示字符串，并提供了一些扩展构件|
+|`fixperm`   | 改变目录树中的文件权限|
+|`install ` | 安装脚本或文件|
+|`mdate  `| 显示文件或目录的修改时间|
+|`Mkin` |   使用相对路径创建链接|
+|`mkshadow `|   创建一颗阴影树|
+|`move`  |  带有替换功能的文件移动|
+|`Path ` |  处理程序路径|
+|`platform ` |  显示平台标识|
+|`Prop` |   显示一个带有动画效果的进度条|
+|`rotate  ` | 转置日志文件|
+|`Scpp`    |共享的C预处理器|
+|`Slo `  |根据库的类别，分离链接器选项|
+|`Subst`  |  使用sed的替换操作|
+|`Table `|   以表格的形式显示由字段分隔的数据|
+|`tarball`  |  从文件和目录中创建tar文件|
+|`version ` |  创建版本信息文件|
+|`mkdir`  |  创建一个或更多目录|
+
++ shtool函数的使用格式：`shtool [options] [function [options] [args]]`；
+### 使用库
++ 可以在命令行或脚本中使用shtool函数；使用platform：`shtool platform`；使用prop：它可以使用`\、|、/和-`字符创建一个旋转的进度条；`ls -al /user/bin |shtool prop -p "waiting......"`；
