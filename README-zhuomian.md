@@ -1,4 +1,5 @@
-
+### 使用图形
+[使用图形](https://github.com/ningbaoqi/Shell/blob/master/README-usepic.md)
 
 ### 使用图形
 + 本节描述的kdialog和zenity包，他们各自为KDE和GNOME桌面提供了图形化窗口部件；
