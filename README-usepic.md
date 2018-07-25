@@ -28,3 +28,44 @@
 ##### 使用kdialog
 + 可以在shell脚本中使用kdialog窗口部件，方法类似与dialog部件，最大的不同是kdialog窗口部件用STDOUT来输出值，而不是STDERR；创建系统管理菜单（KDE应用）：
 
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-50.jpg) 
+
+### GNOME环境
++ GNOME图形化环境支持两中流行的可生成标准窗口的包：gdialog和zenity包；
+#### zenity部件
++ zenity允许用命令行选项创建不同的窗口部件：zenity窗口部件：
+
+|选项|描述|
+|------|------|
+|`--calendar`|显示一整月日历|
+|`--entry`|显示文本输入对话窗口|
+|`--error`|显示错误消息对话窗口|
+|`--file-selection`|显示完整的路径名和文件名对话窗口|
+|`--info`|显示消息对话窗口|
+|`--list`|显示多选列表或单选列表对话窗口|
+|`--notification`|显示通知图标|
+|`--progress`|显示进度条对话窗口|
+|`--question`|显示yes/no对话窗口|
+|`--scale`|显示可调整大小的窗口|
+|`--text-info`|显示含有文本的文本框|
+|`--warning`|显示警告对话窗口|
+
++ zenity命令行程序与kdialog和dialog程序的工作方式有些不同，许多部件类型都用另外的命令行选项定义，而不是作为某个选项的参数；zenity命令能够提供一些非常酷的高级对话窗口：`zenity --calendar`：会显示如下图表，并且选中某个日期，将会在控制台上显示出来；zenity命令会将值返回到STDOUT中；
+
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-51.jpg) 
+
++ zenity中的文件选择选项：`zenity --file-selection`；
+
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-52.jpg) 
+
++ 可以用对话窗口来浏览系统上任意一个目录位置（只要你有查看该目录的权限），并选择文件，当你选定文件时，zenity命令会返回完整的文件路径名；
+#### 在脚本中使用zenity
++ 创建系统管理菜单：
+
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-53.jpg) 
+
++ 运行结果：
+
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-54.jpg) 
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-55.jpg) 
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-56.jpg) 
