@@ -16,7 +16,9 @@
 + mysql程序实现了MySQL服务器支持的所有标准的SQL命令，mysql程序实现的一条很棒的SQL命令是`SHOW`命令，可以利用这条命令提取MySQL服务器的相关信息，比如创建的数据库和表：
 
 ![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-97.jpg)
+
 ![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-98.jpg)
+
 ![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-99.jpg)
 
 + 用SQL命令SHOW来显示当前在MySQL服务器上配置过的数据库，然后用SQL命令`USE`来连接到单个数据库，mysql会话一次只能连一个数据库；在使用每个命令后面都会添加一个分号，在mysql程序中，分号表明命令的结束，如果不用分号，他会提示输入更多的数据：
