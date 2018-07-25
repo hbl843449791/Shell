@@ -13,3 +13,13 @@ if command;then
 fi
 ```
 
+### 使用if-then-else语句
+```
+if command if语句中的命令返回退出状态码为0时，then部分的命令将会被执行，当if语句中的退出状态码为非0时，将会执行else部分的命令
+then
+       commands
+else
+       commands
+fi
+```
+
