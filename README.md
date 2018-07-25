@@ -10,3 +10,5 @@
 [bash命令快速指南](https://github.com/ningbaoqi/Shell/blob/master/README-bashnan.md)
 ### 使用其他shell
 [使用其他shell](https://github.com/ningbaoqi/Shell/blob/master/README-othershell.md)
+### 正则表达式
+[正则表达式](https://github.com/ningbaoqi/Shell/blob/master/README-biaodashi.md)
