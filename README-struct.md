@@ -110,3 +110,10 @@ fi
 |`file1 -nt file2` |检查file1是否比file2新；在比较之前，需要确保两个文件存在|
 |`file1 -ot file2`|  检查file1是否比file2旧；在比较之前，需要确保两个文件存在|
 
+### 复合条件测试
+
+|if-then语句允许你使用布尔逻辑来组合测试|
+|------|
+|`[ condition1 ] && [ condition2 ]`；与关系，要让then部分执行，两个条件都得满足；如：`if [ -d $HOME ] && [ -w $HOME/testing ]`|
+|`[ condition1 ] \|\| [ condition2 ]`；或关系，任意一个条件为true，then将会执行 |
+
