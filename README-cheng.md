@@ -151,4 +151,6 @@ echo "this will be bad" >&3
 ### 阻止命令输出
 + 可以将STDERR重定向到一个叫做`null`文件的特殊文件，`null`文件里什么都没有，shell输出到`null`文件的任何数据都不会保存，全部都被丢掉了；在Linux系统上`null`文件的标准位置是`/dev/null`，重定向到该位置的任何数据都会被丢掉，不会显示。：`ls -al badfile test 2> /dev/null`；可以在输入重定向中将`/dev/null`作为输入文件，由于`/dev/null`文件不包含任何内容，程序员通常用它来快速清除现有文件中的数据，而不用先删除文件再重新创建：`cat /dev/null >testfile`；
 
+### 记录消息
++ 将输出同时发送到显示器和日志文件，不用将重定向两次，只要使用`tee`命令即可；`tee`命令相当于管道的一个`T`型接头，它将从STDIN过来的数据同时发送两处`STDOUT`；`tee命令行所指定的文件名`；由于`tee`会重定向来自STDIN的数据，可以用它配合管道命令来重定向命令输出：`date | tee testfile`；默认情况下，`tee`命令会在每次使用时覆盖输出文件的内容，如果想将数据追加到文件中可以使用` -a `选项：`date | tee -a testfile`；
 
