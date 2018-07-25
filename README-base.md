@@ -61,3 +61,47 @@ who
 #### exit命令
 +  默认情况下，shell脚本会以脚本中的最后一个命令的退出状态码退出，可以改变这个默认行为，返回自己的退出状态码，exit命令允许你在脚本结束时指定一个退出状态码，在脚本末尾能执行的地方添加 `exit 5`；
 
+### 执行数学运算
+#### expr命令
++ 该命令显得比较笨拙； `expr 1 + 5`；
+
+|expr命令能识别少数的数学和字符串操作符|描述|
+|------|------|
+|`ARG1\| ARG2` |如果ARG1既不是null也不是零值，返回ARG1，否则返回ARG2|
+|`ARG1 & ARG2` |如果没有参数是null或零值，返回ARG1，否则返回0|
+|`ARG1 <= ARG2 `|如果ARG1小于等于ARG2 返回1，否则返回0|
+|`ARG1 < ARG2` |如果ARG1小于ARG2，返回1，否则返回0|
+|`ARG1 = ARG2` |如果ARG1等于ARG2，返回1 否则返回0|
+|`ARG1 != ARG2 `|如果ARG1不等于ARG2 返回1，否则返回0|
+|`ARG1 >= ARG2 `|如果ARG1大于或等于ARG2 返回1 否则返回0|
+|`ARG1 > ARG2` |如果ARG1大于ARG2 返回1 否则返回0|
+|`ARG1 + ARG2 `|返回ARG1和ARG2的算术运算和|
+|`ARG1 - ARG2 ` |返回ARG1 和 ARG2的算术运算差|
+|`ARG1 * ARG2 `|返回ARG1和ARG2的算术乘积|
+|`ARG1 / ARG2` |返回ARG1被ARG2除的算术商|
+|`ARG1 % ARG2 `|返回ARG1被ARG2除的算术余数|
+|`STRING :REGEXP `|如果REGEXP匹配到了STRING中的某个模式，返回该模式匹配|
+|`match STRING REGEXP` |如果REGEXP匹配到了STRING中的某个模式，返回该模式匹配|
+|`substr STRING POS LENGTH` |返回指定位置为POS、长度为LENGTH个字符的子字符串|
+|`index STRING CHARS` |返回在STRING中找到CHARS字符串的位置，否则返回0|
+|`length STRING` |返回字符串STRING 的数值长度|
+|`+TOKEN` |将TOKEN 解释成字符串，即使是关键字|
+|`（EXPRESSION）`| 返回EXPRESSION的值|
+
++ 使用算术运算符时有时候需要使用\转义字符；`expr 5 \* 2`；
+
+#### 使用方括号
++ 可以使用美元符号`$`和方括号`[]`将数学表达式围起来如`$[opeartion]`；如：`val1=$[1 + 2]`；用方括号执行shell数学运算比用expr命令方便的多，这种技术也适用于脚本；不用担心shell会误解其他符号，shell会知道它不是通配符，因为在方括号内：如：`var3=$[$var1 / $var2]`方括号运算的数值进行赋值；bash shell数学运算符只支持整数运算；
+#### 浮点解决方案
++ 内建的bash计算器叫做`bc`；
+
+|bc能够识别|
+|------|
+|数字（整型和浮点型）|
+|变量（简单变量和数组）；进入bc；`value=1`；`value * 4`|
+|注释（以#或c语言中的/**/开始的行）|
+|表达式|
+|编程语言（如fi-then）|
+|函数|
+
++ 直接输入 bc即可，就能进入计算器；进入bc，输入`scale=4`就表示现在是保留4位小数，scale默认为0；`quit`就能退出计算器；在脚本中使用bc；`variable=$(echo ”option；expression“ | bc)`；option 允许设置变量，可以指定不止一个，多个变量有`；`隔开；expression 数学表达式；如：`var1=$(echo “scale=4；3.44 / 5”| bc)`；bc能够识别重定向输入； bash计算器中创建的变量只能在bash计算器中使用，不能再shell脚本中使用；
