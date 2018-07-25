@@ -50,3 +50,63 @@ else
 fi
 ```
 
+### test命令
++ test命令提供了在if-then语句中测试不同条件的途径，如果test命令中列出的条件成立，test命令就会退出并返回退出状态码0，如果条件不成立，test命令就会退出并返回非零的退出状态码；
+#### test命令的格式
++ `test condition`：condition是test命令要测试的一系列参数和值，当用在if-then语句中，将会如下：
+```
+if test condition
+then
+       commands
+fi
+```
++ 如果不写test命令的condition部分，他将会以非零的退出状态码退出；当你加入一个条件时，test命令会测试该条件，例如：可以使用test命令确定变量中是否有内容：`if test $my_variable`；
+#### bash shell 提供了另一种条件测试方法
++ 格式如下：方括号定义了测试条件，注意第一个方括号之后和第二个方括号之前必须加上空格，否则将会报错；
+```
+if [ condition ]
+then
+       commands
+fi
+```
+#### test命令可以判断三类条件
+##### 数值比较
+
+|比较|描述|
+|------|------|
+|`n1 -eq n2`  |检查n1是否与n2相等；如：`if [ $value1 -eq $value2 ]`判断两个值是不是相等|
+|`n1 -ge n2` | 检查n1是否大于或等于n2|
+|`n1 -gt n2` | 检查n1是否大于n2；如：`if [ $value1 -gt 5 ] `测试变量value1的值是不是大于5|
+|`n1 -le n2` | 检查n1是否小于或等于n2|
+|`n1 -lt n2`  |检查n1是否小于n2|
+|`n1 -ne n2`  |检查n1是否不等于n2|
+
++ bash shell只能处理整数，如果你只是通过echo语句来显示这个结果，那没问题，但是，在基于数字的函数中就不行了；
+##### 字符串比较
+
+|比较|描述|
+|------|------|
+|`str1 = str2`|  检查str1是否和str2相同|
+|`str1 ！= str2` | 检查str1是否和str2不同|
+|`str1 < str2 ` |检查str1是否比str2小 ；如：`if [ $value1 \> $var2 ]`|
+|`str1 > str2`|  检查str1是否比str2大|
+|`-n str1` | 检查str1的长度是否非0；`if [ -n $val1 ]`|
+|`-z str1` |检查str1的长度是否为0 为‘’或者未设定长度都为0|
+
++ 比较字符串相等性时，比较测试会将所有的标点和大小写情况都考虑在内；字符串顺序：大于号和小于号必须转义，否则shell会把他们当作重定向符号，把字符串值当作文件名；大于和小于顺序和sort命令所采用的不同；
+##### 文件比较
+
+|比较|描述|
+|------|------|
+|`-d file `| 检查file是否存在并是一个目录；如果你打算将文件写入目录或是准备切换到某个目录，最好先检查一下 如：`if [ -d $directorypath ]`|
+|`-e file`|  检查file是否存在；`if [ -e file ]`|
+|`-f file `| 检查file是否存在并是一个文件；`if [ -f $filepath ]`|
+|`-r file`| 检查file是否存在并可读；在读取文件之前最好先查看下；如 `if [ -r $filepath ]`|
+|`-s file`|检查file是否存在并非空；`if [ -s $filepath ]`|
+|`-w file`| 检查file是否存在并可写；`if [ -w file ]`|
+|`-x file`| 检查file是否存在并可执行；`if [ -x filename ] `|
+|`-O file` |检查file是否存在并属于当前用户所有；检查你是不是该文件的属主，如：`if [ -O /etc/passwd ]`|
+|`-G file` |检查file是否存在并且默认组和当前用户相同；检查文件的默认属组，如果修改了属组，他比较的还是默认属组,如：`if [ -G $filepath ]`|
+|`file1 -nt file2` |检查file1是否比file2新；在比较之前，需要确保两个文件存在|
+|`file1 -ot file2`|  检查file1是否比file2旧；在比较之前，需要确保两个文件存在|
+
