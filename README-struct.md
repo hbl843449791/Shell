@@ -147,3 +147,27 @@ fi
 #### 使用双方括号
 + 双方括号命令提供了针对字符串比较的高级特性,不是所有的shell都支持双方括号，但是目前使用的shell是支持的；格式为：`[[ expression ]]` ；如：`if [[ $USER == r* ]]`；在模式匹配中，可以定义一个正则表达式来匹配字符串，判断是不是匹配此正则表达式；双等号右边的字符串r*视为一个模式，并应用模式匹配规则；
 
+### case命令
++ `case`命令会将指定的变量与不同模式进行比较，如果变量和模式匹配，那么shell会执行为该模式指定的命令，可以通过竖线操作符在同一行中分隔多个模式，星号会获取所有与已知模式不匹配的值；格式如下：注意符号其中匹配的模式是可以多个的：
+```
+case variable in
+patterm1 | patterm2) commands1;;
+patterm3) command2;;
+*)default commands;;
+esac
+```
++ 例如：
+
+```
+case $USER in
+rich | vavava)
+       echo "you rich huozhe vavava"
+       echo "finish";;
+ningbaoqi)
+       echo "ningbaoqi hao niu bi";;
+testing)
+       echo "testing";;
+*)
+       echo "shenm tebushi";;
+esac
+```
