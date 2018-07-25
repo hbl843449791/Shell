@@ -88,4 +88,27 @@ done
 
 + 使用多个变量；`for (( a=1, b=10 ; a <= 10 ; b++ ,a++ ))`；
 
+### while命令
+#### while命令的基本格式
+```
+while test_command
+do
+       other_commands
+done
+```
+#### 例子：
+```
+name=10
+while [ $name -gt 0 ]
+do
+       echo $name
+       name=$[ $name - 1 ]
+done
+```
+#### 使用多个测试命令
++ 只有最后一个测试命令的退出状态码会被用来决定什么时候结束循环；注意，每个测试命令都出现在单独的一行上；
+```
+while echo $name
+              [ $name -ge 0 ]
+```
 
