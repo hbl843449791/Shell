@@ -62,3 +62,23 @@ done
 ```
 + 执行该脚本：`./test  one two three four `；
 
+### 移动变量
++ `bash shell` 的`shift`命令能够用来操作命令行参数，`shift`命令会根据他们的相对位置来移动命令行参数；在使用`shift`命令时，默认情况下它会将每个参数变量向左移动一个位置，所以，变量`$3`的值会移动到`$2`中，变量`$2`的值会移动到`$1`中，而变量`$1`的值则会被删除（注意，变量`$0`的值，也就是程序名，不会改变）；这是遍历命令行参数的另一个好办法，尤其是在你不知道到底有多少参数时，你可以只操作第一个参数，移动参数，然后继续操作第一个参数；如：
+```
+count=1
+while [ -n "$1" ]
+do
+       echo "parameter #$count = $1"
+       count=$[ $count + 1 ]
+       shift
+done
+```
++ 执行该脚本文件：`./test one two three four`；注意：使用`shift`命令的时候要小心，如果某个参数被移除，它的值就会被丢弃了，无法再恢复；可以一次性移动多个位置，只需要在shift命令提供一个参数，指明要移动的位置数就行了：如：
+```
+echo
+echo "the original parameter is $*"
+shift 2
+echo "here's the new first parameter : $1"
+```
++ 执行该脚本文件：`./test one two three four five`；
+
