@@ -25,7 +25,7 @@
 ##### 默认环境变量
 + 需要在dash环境下；可以是终端使用dash脚本：`./bin/dash`；来运行dash shell，然后使用set命令就可以查看默认的环境变量：
 
-![image](https://github.com/ningbaoqi/Java/blob/master/gif/pic-30.jpg) 
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-1.jpg) 
 
 ##### dash的位置参数变量
 
