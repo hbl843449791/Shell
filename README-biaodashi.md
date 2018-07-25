@@ -118,3 +118,6 @@
 
 ### 扩展正则表达式
 [扩展正则表达式](https://github.com/ningbaoqi/Shell/blob/master/README-kuozhan.md)
+
+### 正则表达式实战
+[正则表达式实战](https://github.com/ningbaoqi/Shell/blob/master/README-shizhan.md)
