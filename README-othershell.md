@@ -81,6 +81,7 @@
 + 由于dash shell只是Bourne Shell的一个子集，bash shell脚本中的有些功能没法在dash shell中使用，下面介绍一下bash shell 中能使用但是在dash shell中不能使用的bash shell功能；
 #### 算术运算
 + bash shell脚本中进行数学运算的方法：使用`expr`命令：`expr operation`；使用方括号：`$[ operation ]`；使用双圆括号：`$((operation))`；dash shell支持expr命令和双圆括号方法，但`不支持方括号`方法；在dash shell脚本中执行算术运算的正确格式是用双圆括号方法：
+
 ![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-2.jpg) 
 
 #### test命令
