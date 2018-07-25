@@ -81,18 +81,17 @@
 + 由于dash shell只是Bourne Shell的一个子集，bash shell脚本中的有些功能没法在dash shell中使用，下面介绍一下bash shell 中能使用但是在dash shell中不能使用的bash shell功能；
 #### 算术运算
 + bash shell脚本中进行数学运算的方法：使用`expr`命令：`expr operation`；使用方括号：`$[ operation ]`；使用双圆括号：`$((operation))`；dash shell支持expr命令和双圆括号方法，但`不支持方括号`方法；在dash shell脚本中执行算术运算的正确格式是用双圆括号方法：
-
-![image](https://github.com/ningbaoqi/Java/blob/master/gif/pic-30.jpg) 
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-2.jpg) 
 
 #### test命令
 + bash shell的test命令允许使用双等号`==`来测试两个字符串是否相等，但是，dash shell中的test命令不能识别用做文本比较的`==`符号，只能识别`=`号：
 
-![image](https://github.com/ningbaoqi/Java/blob/master/gif/pic-30.jpg) 
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-3.jpg) 
 
 #### function命令
 + bash shell支持两种定义函数的方法：使用`函数名（）`语句；使用`function 函数名` 语句；dash shell不支持`function 函数名 `语句，在dash shell中，你必须用函数名和圆括号、语句定义函数：
 
-![image](https://github.com/ningbaoqi/Java/blob/master/gif/pic-30.jpg) 
+![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-4.jpg) 
 
 ### zsh shell（默认没有这个shell）
 + zsh shell的一些独特的功能：改进的shell选项处理；shell兼容性模式；可加载模块；zsh shell提供了一组核心内建命令，并提供了添加额外命令模块的能力，每个命令模块都为特定场景提供了另外一组内建命令；
