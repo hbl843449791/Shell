@@ -4,3 +4,5 @@
 [调整谦让度](https://github.com/ningbaoqi/Shell/blob/master/README-qianrang.md)
 ### 作业控制
 [作业控制](https://github.com/ningbaoqi/Shell/blob/master/README-zuoye.md)
+### 在非控制台下运行脚本
+[在非控制台下运行脚本](https://github.com/ningbaoqi/Shell/blob/master/README-fei.md)
