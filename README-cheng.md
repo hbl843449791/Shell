@@ -53,3 +53,74 @@ do
        count=$[ $count + 1 ]
 done
 ```
+
+### 创建自己的重定向
++ 在shell中最多可以有9个打开的文件描述符，其他6个从3~8的文件描述符均可用作输入或输出重定向，你可以将这些文件描述符中的任意一个分配给文件，然后在脚本中使用它们；
+#### 创建输出文件描述符
++ 可以用`exec`命令来给输出分配文件描述符，和标准的文件描述符一样，一旦将另一个文件描述符分配给一个文件，这个重定向就会一直生效，直到你重新分配：如：
+
+```
+exec 3>testout //将文件描述符3重定向到另一个文件
+echo "this should display on the monitor"
+echo "and this should be stored in the file" >&3 //被输出到文件中了
+echo "then this should be back on the monitor"
+```
++ 也可以不用创建新文件，而是使用`exec`命令来将输出追加到现有文件中：`exec 3>>testout`；
+#### 重定向文件描述符
+```
+exec 3>&1   将文件描述符3重定向到文件描述符1的当前位置也就是STDOUT，这就意味着任何发送给文件描述符3的输出都将会显示在显示器上
+exec 1>testout  将STDOUT重定向到文件，shell现在会将发送给STDOUT的输出直接重定向到输出文件中，但是文件描述符3仍然制定的是STDOUT原来的位置，也就是显示器，如果此时将输出数据发送到文件描述符3它仍然会出现在显示器上
+echo "this should store in the output file"
+echo "along with this line."
+exec 1>&3
+echo "now things should be back to normal"
+```
+#### 创建输入文件描述符
++ 在重定义到文件之前，先将STDIN文件描述符保存到另外一个文件描述符，然后在读取完文件之后再将STDIN恢复到它原来的位置；如：
+```
+exec 6<&0
+exec 0<testfile
+count=1
+while read line
+do
+       echo "line #$count:$line"
+       count=$[ $count + 1 ]
+done
+echo 0<&6
+read -p "are you done now?" answer
+case $answer in
+       Y | y) echo "goodbye";;
+       N | n) echo "sorry this is the end";;
+esac
+```
+#### 创建读写文件描述符
++ 可以打来单个文件描述符来作为输出和输入，可以用同一个文件描述符对同一个文件进行读写，不过使用该方法时，一定要小心，由于你是对同一个文件进行数据读写，shell会维护一个内部指针，指明在文件中的当前位置，任何读或写都会从文件指针上次的位置开始：
+
+```
+exec 3<> testfile    exec命令将文件描述符3分配给文件testfile以进行文件读写
+read line <&3   通过分配好的文件描述符，使用read命令读取文件中的第一行
+echo "read:$line"  将读取的第一行显示在STDOUT上
+echo "this is a test line" >&3  用exec语句将一行数据写入到同一个文件描述符打开的文件中
+```
++ 以上脚本运行完毕后，查看testfile文件内容的话，将会发现写入文件中的数据覆盖了已有的数据，当脚本向文件中写入数据时，他是从文件指针所处的位置开始，read命令读取了第一行数据，所以它使得文件指针指向了第二行数据的第一个字符，在echo语句将数据输出到文件时，他会将数据放在文件指针的当前位置，覆盖了该位置的已有数据；
+#### 关闭文件描述符
++ 如果你创建了新的输出或输入文件描述符，shell会在脚本退出时自动关闭他们，然而在希望脚本结束前手动关闭文件文件描述符，要关闭文件描述符，将它重定向到特殊符号`&-`；`exec 3>&-`；会关闭文件描述符3，不再在脚本中使用，除非重新的进行分配；如：
+
+```
+exec 3>testfile
+echo “this is a test line of data” > &3
+exec 3>$-
+echo "this won't work" >&3  一旦关闭了文件描述符，就不能在脚本中向它写入任何数据，否则shell会生成错误信息
+```
+
++ 在关闭文件描述符时还要注意；如果随后你在脚本中打开了同一个输出文件，shell会用一个新文件来替换已有文件，这就意味着如果你输出数据，就会覆盖已有文件：如：
+
+```
+exec 3>testfile
+echo "this is a test line of data" >&3
+exec 3>&-
+cat testfile
+exec 3>testfile
+echo "this will be bad" >&3
+```
+
