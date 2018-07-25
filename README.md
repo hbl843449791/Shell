@@ -8,3 +8,5 @@
 [更多的结构化命令](https://github.com/ningbaoqi/Shell/blob/master/README-more.md)
 ### bash命令快速指南
 [bash命令快速指南](https://github.com/ningbaoqi/Shell/blob/master/README-bashnan.md)
+### 使用其他shell
+[使用其他shell](https://github.com/ningbaoqi/Shell/blob/master/README-othershell.md)
