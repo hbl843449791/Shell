@@ -225,3 +225,21 @@ echo "the new array is : ${result[*]}"
 ```
 + arraydblr函数使用echo语句来输出每个数组元素的值，脚本用arraydblr函数输出来重新生成一个新的数组变量；
 
+### 函数递归
++ 函数可以调用自己来得到结果，通常递归函数都有一个最终可以迭代到的基准值；使用递归实现：`X! = X * ( X - 1 )!`计算阶乘；
+```
+function fun1{
+       if [$1 -eq 1 ]
+       then
+              echo 1
+       else
+              local temp=$[ $1 - 1 ]
+              local result=$(fun1 $temp)
+              echo $[ $result * $1 ]
+       fi
+}
+read -p "enter value:" value
+result=$(fun1 $value)
+echo "the fun1 of $value is : $result"
+```
+
