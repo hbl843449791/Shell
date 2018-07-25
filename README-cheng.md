@@ -148,3 +148,7 @@ echo "this will be bad" >&3
 |NODE   | 本地文件的节点号|
 |NAME   | 文件名|
 
+### 阻止命令输出
++ 可以将STDERR重定向到一个叫做`null`文件的特殊文件，`null`文件里什么都没有，shell输出到`null`文件的任何数据都不会保存，全部都被丢掉了；在Linux系统上`null`文件的标准位置是`/dev/null`，重定向到该位置的任何数据都会被丢掉，不会显示。：`ls -al badfile test 2> /dev/null`；可以在输入重定向中将`/dev/null`作为输入文件，由于`/dev/null`文件不包含任何内容，程序员通常用它来快速清除现有文件中的数据，而不用先删除文件再重新创建：`cat /dev/null >testfile`；
+
+
