@@ -209,3 +209,18 @@ do
 done > output.txt   //将不会在控制台上输出，而是将要输出的输入到output.txt文件中 done后面也可以使用管道传入到sort命令: done | sort
 ```
 
+### 实例：查找可执行文件
+```
+IFS=:
+for folder in $PATH
+do
+       echo "$folder"
+       for file in $folder/*
+       do
+              if [ -x $file ]
+              then
+                     echo "   $file"
+              fi
+       done
+done
+```
