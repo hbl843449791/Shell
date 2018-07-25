@@ -226,3 +226,30 @@
 #### 查看、添加、删除模块
 + zmodload命令是zsh模块的管理接口，可以在zsh shell会话中用这个命令查看、添加和删除模块；zmodload命令不加任何参数会显示zsh shell中当前已安装的模块；不同的zsh shell 实现在默认情况下包含了不同的模块，要添加新模块，只需在zmodload行上指定模块名即可；如：`zmodload zsh/zftp`；要删除已安装的模块使用-u参数和模块名：如：`zmodload -u zsh/zftp`；通常习惯将zmodload命令放进`$HOME/.zshrc`启动文件中，这样在zsh启动时常用的函数就会自动加载；
 
+### zsh脚本编程
+#### 数学运算
++ zsh shell在所有数学运算中都提供了对浮点型的全面支持；
+#### 执行运算
++ zsh shell提供了执行数学运算的两种方法：`let命令`；`双圆括号`；在使用let命令时，应该在等式前后加上双引号，这样才能使用空格：`let value="4 * 5.1 / 3.2"`；使用浮点数会带来精度问题，通常要使用printf命令，并指定正确显示结果所需的小数点精度：`printf "%6.3f\n" $value1`；第二种方法是使用双圆括号，这个方法结合了两种定义数学运算的方法：`value=$(( 4 * 5.1 ))`；`(( value=4 * 5.1))`；
+#### 数学运算
++ 添加了zsh/mathfunc模块就可以使用高级的运算：开方：`value=$(( sqrt(9) ))`；zsh中支持很多数学函数，要查看zsh/mathfunc模块提供的所有数学函数的清单，可以查看zsh模块的手册界面；
+#### 结构化命令
++ zsh shell为shell脚本提供了常用的结构化命令；一、`if-then-else`；二、`for`；三、`while`；四、`until`；五、`select`；六、`case`；zsh中的每个结构化命令采用的语法都跟你熟悉的bash shell一样，zsh shell还包含了另外一个叫做`repeat`的结构化命令，`repeat`命令使用如下格式：
+```
+repeat param
+do
+       commands
+done
+```
+
++ `param`参数必须是一个数字或能算出一个数字的数学表达式，指定的就是循环的次数：如：
+
+```
+value=$(( 10 / 2 ))
+repeat $value
+do
+       echo "this is a test"
+done
+```
+#### 函数
++ zsh shell支持使用`function命令`或通用`圆括号`定义函数名的方式来创建自定义函数；跟bash shell一样；
