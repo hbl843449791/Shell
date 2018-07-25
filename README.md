@@ -14,3 +14,5 @@
 [正则表达式](https://github.com/ningbaoqi/Shell/blob/master/README-biaodashi.md)
 ### 处理用户输入
 [处理用户输入](https://github.com/ningbaoqi/Shell/blob/master/README-inout.md)
+### 创建函数
+[创建函数](https://github.com/ningbaoqi/Shell/blob/master/README-function.md)
