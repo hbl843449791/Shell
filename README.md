@@ -20,3 +20,5 @@
 [控制脚本](https://github.com/ningbaoqi/Shell/blob/master/README-control.md)
 ### 图形化桌面环境中的脚本编程
 [图形化桌面环境中的脚本编程](https://github.com/ningbaoqi/Shell/blob/master/README-zhuomian.md)
+### 创建与数据库web及电子邮件相关的脚本
+[创建与数据库web及电子邮件相关的脚本](https://github.com/ningbaoqi/Shell/blob/master/README-chuangjianshu.md)
