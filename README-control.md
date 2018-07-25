@@ -8,3 +8,5 @@
 [在非控制台下运行脚本](https://github.com/ningbaoqi/Shell/blob/master/README-fei.md)
 ### 以后台模式运行脚本
 [以后台模式运行脚本](https://github.com/ningbaoqi/Shell/blob/master/README-houtai.md)
+### 信号处理
+[信号处理](https://github.com/ningbaoqi/Shell/blob/master/README-xinhao.md)
