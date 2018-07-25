@@ -16,3 +16,5 @@
 [处理用户输入](https://github.com/ningbaoqi/Shell/blob/master/README-inout.md)
 ### 创建函数
 [创建函数](https://github.com/ningbaoqi/Shell/blob/master/README-function.md)
+### 控制脚本
+[控制脚本](https://github.com/ningbaoqi/Shell/blob/master/README-control.md)
