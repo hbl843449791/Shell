@@ -18,3 +18,5 @@
 [创建函数](https://github.com/ningbaoqi/Shell/blob/master/README-function.md)
 ### 控制脚本
 [控制脚本](https://github.com/ningbaoqi/Shell/blob/master/README-control.md)
+### 图形化桌面环境中的脚本编程
+[图形化桌面环境中的脚本编程](https://github.com/ningbaoqi/Shell/blob/master/README-zhuomian.md)
