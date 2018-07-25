@@ -93,3 +93,7 @@
 + bash shell支持两种定义函数的方法：使用`函数名（）`语句；使用`function 函数名` 语句；dash shell不支持`function 函数名 `语句，在dash shell中，你必须用函数名和圆括号、语句定义函数：
 
 ![image](https://github.com/ningbaoqi/Java/blob/master/gif/pic-30.jpg) 
+
+### zsh shell（默认没有这个shell）
++ zsh shell的一些独特的功能：改进的shell选项处理；shell兼容性模式；可加载模块；zsh shell提供了一组核心内建命令，并提供了添加额外命令模块的能力，每个命令模块都为特定场景提供了另外一组内建命令；
+
