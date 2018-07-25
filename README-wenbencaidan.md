@@ -9,7 +9,7 @@
 
 + 这样任何时候都能调用menu函数来重现菜单；
 ### 添加菜单逻辑
-+ `case`命令应该根据菜单中输入的字符来调用相应的函数，用默认的case命令字符（星号）来处理所有不正确的菜单项：如：
++ `case`命令应该根据菜单中输入的字符来调用相应的函数，用默认的case命令字符（星号）来处理所有不正确的菜单项：
 
 ![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-81.jpg) 
 
