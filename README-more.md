@@ -152,3 +152,46 @@ do
 done
 ```
 
+### 控制循环
+#### break命令
++ `break`命令可以退出任意类型的循环；跳出单个循环：在shell执行break命令时，他会尝试跳出当前正在执行的循环：如：
+```
+for name in 1 2 3 4 5 6 7 8 9 10
+do
+       if [ $name -eq 5 ]
+       then
+              break
+       fi
+       echo "interator number : $name"
+done
+```
++ 使用break时只会终止所在循环；使用` break n`（任意的正整数）；`break 2`将会终止本次循环并且也会终止本循环所在的外层的一个循环：如：
+
+```
+for(( a = 1; a < 4 ; a++))
+do
+       echo "outer loop:$a"
+       for(( b = 1; b<4 ; b++))
+       do
+              if[ $b -gt 4 ]
+              then
+                    break 2
+              fi
+              echo "       inner loop:$b"
+       done
+done
+```
+#### continue命令
++ 提前终止某次循环中的命令，但并不会完全终止整个循环，与Java中的含义相同；和break一样，continue命令也可以通过命令行参数指定要继续执行哪一级循环，`continue n`；结束本层循环并且结束包含本次循环的外层循环的本次循环，然后继续执行循环；如：
+
+```
+for(( name = 1 ; name < 12 ; name++))
+do
+       if [ $name -gt 5 ] && [ $name -lt 10 ]
+       then
+              continue
+       fi
+       echo "iterator number : $name"
+done
+```
+
