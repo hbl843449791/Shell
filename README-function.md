@@ -159,3 +159,69 @@ fi
 ```
 + 在func1函数中使用`$temp`变量时，并不影响在脚本主体中赋给`$temp`变量的值；
 
+### 数组变量和函数
+#### 向函数传数组参数
++ 将数组变量当作单个参数传递的话，他不会起作用：如：
+```
+function test{
+       echo "the parameters are:$@"
+       thisarray=$1
+       echo "the received array is ${thisarray[*]}"
+}
+myarray=(1 2 3 4 5)
+echo "the original array is : ${thisarray[*]}"
+test $myarray
+```
++ 如果试图将该数组变量作为函数参数，函数只会取数组变量的第一个值；要解决这个问题，必须将该数组变量的值分解成单个的值，然后将这些值作为函数参数使用；
+#### 正确的将数组参数传递给函数
+```
+function fun1{
+       local newarray
+       newarray=($@)
+       echo "the new array value is : ${newarray[*]}"
+}
+myarray=(1 2 3 4 5)
+echo "the original array is ${myarray[*]}"
+fun1 ${myarray[*]}
+```
+#### 正确的将数组参数传递给函数
+```
+function addarray{
+       local sum = 0
+       local newarray
+       newarray=($(echo "$@"))
+       for value in ${newarray[*]}
+       do
+               sum=$[ $sum + $value ]
+       done
+       echo $sum
+}
+myarray=(1 2 3 4 5)
+echo "the original array is :${myarray[*]}"
+arg1=$(echo ${myarray[*]})
+result=$(addarray $arg1)
+echo "the result is $result"
+```
+### 从函数返回数组
+```
+function arraydblr{
+       local origarray
+       local newarray
+       local elements
+       local i
+       origarray=($(echo "$@"))
+       newarray=($(echo "$@"))
+       elements=$[ $# - 1 ]
+       for(( i=1;i<=elements;i++)){
+              newarray[$i] = $[ ${origarray[$i]} * 2 ]
+       }
+       echo ${newarray[*]}
+}
+myarray=(1 2 3 4 5)
+echo "the original array is : ${myarray[*]}"
+arg1=$(echo ${myarray[*]})
+result=($(arraydblr $arg1))
+echo "the new array is : ${result[*]}"
+```
++ arraydblr函数使用echo语句来输出每个数组元素的值，脚本用arraydblr函数输出来重新生成一个新的数组变量；
+
