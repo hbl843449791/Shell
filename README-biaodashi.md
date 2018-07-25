@@ -115,3 +115,6 @@
 + 星号还可以使用在字符组上，他允许指定可能在文本中出现多次的字符组或字符区间：
 
 ![image](https://github.com/ningbaoqi/Shell/blob/master/gif/pic-28.jpg)
+
+### 扩展正则表达式
+[扩展正则表达式](https://github.com/ningbaoqi/Shell/blob/master/README-kuozhan.md)
