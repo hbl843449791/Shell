@@ -23,3 +23,30 @@ else
 fi
 ```
 
+### 嵌套if
++ 有时你需要检查脚本中的多种条件，可以使用嵌套的if-then语句；普通的形式：
+```
+if command
+then
+       commands
+else
+       commands
+       if command
+       then
+              commands
+       fi
+fi
+```
++ 使用elif形式：
+```
+if command
+then
+       commands
+elif command
+then
+       commands
+else
+       commands
+fi
+```
+
