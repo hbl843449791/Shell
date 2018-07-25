@@ -112,3 +112,27 @@ while echo $name
               [ $name -ge 0 ]
 ```
 
+### until命令
++ until命令要求你指定一个通常返回非零退出状态码的测试命令，只有测试命令的退出状态码不为0，bash shell才会执行循环中列出的命令，一旦测试命令返回了退出状态吗0，循环就会结束；
+#### until命令的格式：
+```
+until test_commands
+do
+       other_commands
+done
+```
+#### 例子：
+```
+name=100
+until [ $name -eq 0 ]
+do
+       echo $name
+       name=$[ $name - 25 ]
+done
+```
++ 可以在until命令语句中放入多个测试命令，只有最后一个命令的退出状态码决定了bash shell是否执行已定义的other_commands；
+```
+until echo $name
+              [ $name -eq 0 ]
+```
+
