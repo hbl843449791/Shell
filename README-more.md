@@ -195,3 +195,17 @@ do
 done
 ```
 
+### 处理循环的输出
++ 可以对循环的输出使用管道或进行重定向，可以通过`done`命令之后添加一个处理命令来实现；如：
+```
+for file in /home/ningbaoqi/*
+do
+       if [ -d "$file" ]
+       then
+              echo "$file is a directory"
+       elif
+              echo "$file is a file"
+       fi
+done > output.txt   //将不会在控制台上输出，而是将要输出的输入到output.txt文件中 done后面也可以使用管道传入到sort命令: done | sort
+```
+
